@@ -60,7 +60,7 @@ var getCityValue = function (eventObj) {
 
 	if (eventObj.keyCode === 13) {
 		var inputValue = eventObj.target.value
-		var cityPromise = $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + inputValue)
+		var cityPromise = $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + inputValue)
 		cityPromise.then(getCityCoords)
 	}
 }
@@ -97,9 +97,9 @@ var renderCurrentView =  function (currentResponse) {
 // Render hourly view
 var renderHourlyView =  function (hourlyResponse) {
 	var hourlyHTML = ""
-	var maxHours = hourlyResponse.hours.data[0].time
-	console.log(hourlyResponse)
-	console.log('max hours: ' + maxHours)
+	// var maxHours = hourlyResponse.hours.data[0].time
+	// console.log(hourlyResponse)
+	// console.log('max hours: ' + maxHours)
 
 
 
@@ -111,7 +111,7 @@ var renderHourlyView =  function (hourlyResponse) {
 	// }
 
 
-	hourlyHTML += '<p>The hourly weather is: ' + hourlyResponse.hourly.summary + '</p>'
+	hourlyHTML += '<p>The hourly weather summary is: ' + hourlyResponse.hourly.summary + '</p>'
 
 
 
@@ -123,7 +123,9 @@ var renderDailyView =  function (dailyResponse) {
 	var dailyHTML = ""
 	
 	dailyHTML += '<p>This is the daily view</p>'
-	dailyHTML += '<p>The daily weather is: ' + dailyResponse.daily.summary + '</p>'
+	dailyHTML += '<p>The daily weather summary is: ' + dailyResponse.daily.summary + '</p>'
+
+
 
 	weatherContainer.innerHTML = dailyHTML
 }
