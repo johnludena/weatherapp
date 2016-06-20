@@ -9,20 +9,20 @@ var weatherContainer = document.querySelector('#weather-view')
 var buttonsContainer = document.querySelector('#nav-buttons')
 var searchInput = document.querySelector("#search")
 
-var icons = new Skycons({"color": "orange"});
+var objmap = {
+   "clear-day": Skycons.CLEAR_DAY,
+   "partly-cloudy-day": Skycons.PARTLY_CLOUDY_DAY,
+   "sun": Skycons.CLEAR_DAY,
+   "clear-night": Skycons.CLEAR_NIGHT,
+   "snow": Skycons.SNOW,
+   "sleet": Skycons.SLEET,
+   "wind": Skycons.WIND,
+   "rain": Skycons.RAIN,
+   "cloudy": Skycons.CLOUDY,
+   "fog": Skycons.FOG
+}
 
-icons.set("clear-day", Skycons.CLEAR_DAY);
-icons.set("clear-night", Skycons.CLEAR_NIGHT);
-icons.set("partly-cloudy-day", Skycons.PARTLY_CLOUDY_DAY);
-icons.set("partly-cloudy-night", Skycons.PARTLY_CLOUDY_NIGHT);
-icons.set("cloudy", Skycons.CLOUDY);
-icons.set("rain", Skycons.RAIN);
-icons.set("sleet", Skycons.SLEET);
-icons.set("snow", Skycons.SNOW);
-icons.set("wind", Skycons.WIND);
-icons.set("fog", Skycons.FOG);
 
-icons.play();
 
 // Create function that splits hash string and returns parts as object
 var getHashData = function() {
@@ -82,24 +82,31 @@ var renderCurrentView =  function (currentResponse) {
 	console.log(currentResponse)
 	var currentTemp = Math.floor(currentResponse.currently.temperature)
 	var currentIcon = currentResponse.currently.icon
-	
+
 	var currentHTML = ""
 	
 	currentHTML += '<p id="city">Today in your city</p>'
 	currentHTML += '<span id="big-temp">' + currentTemp + '</span><span class="fahrenheit">&#8457;</span>'
-	currentHTML += '<canvas id="clear-day" width="120" height="120"></canvas>'
-	currentHTML += '<p class="weather-summary">' + currentResponse.currently.summary + '</p>'
+	currentHTML += '<canvas id="' + currentIcon + '" width="120" height="120">' + '</canvas>'
+
+		
+	// currentHTML += '<p class="weather-summary">' + currentResponse.currently.summary + '</p>'
 	
 	weatherContainer.innerHTML = currentHTML
+
+	var superIcon = new Skycons;
+   	superIcon.add(currentIcon, objmap[currentIcon])
+   	superIcon.play()
 
 }
 
 // Render hourly view
 var renderHourlyView =  function (hourlyResponse) {
 	var hourlyHTML = ""
-	// var maxHours = hourlyResponse.hours.data[0].time
-	// console.log(hourlyResponse)
-	// console.log('max hours: ' + maxHours)
+	console.log('my hourly object below:')
+	console.log(hourlyResponse)
+	var maxHours = hourlyResponse.hourly.data[0].time
+	console.log('max hours: ' + maxHours)
 
 
 

@@ -5,12 +5,13 @@
 body {
 	background: black;
 	font-family: Helvetica, Arial, sans-serif;
+  	background: linear-gradient(to right, #ffff8a , #ed9e36); /* ADD VENDOR PREFIXES */
 }
 
 #wrapper {
 	max-width: 920px;
 	background: #fff;
-	margin: 0 auto;
+	margin: 4em auto;
 	padding: 2em;
 }
 
