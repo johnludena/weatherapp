@@ -206,7 +206,7 @@ var errorHandler = function(error) {
 // Fetch weather data promise
 var fetchData = function(latitude, longitude) {
 	// Get Forecast.io promise
-	var weatherPromise = $.getJSON(BASE_URL + KEY + '/' + latitude + ',' + longitude)
+	var weatherPromise = $.getJSON(BASE_URL + KEY + '?callback=?' + '/' + latitude + ',' + longitude)
 	return weatherPromise
 }
 
